@@ -1,0 +1,1771 @@
+{
+ "version": "0.2",
+ "center": "cathay-dunnan",
+ "sections": {
+  "general": "一般檢查",
+  "physical": "理學檢查",
+  "lung": "肺部檢查",
+  "cardio": "心血管及代謝系統",
+  "digestive": "消化系統",
+  "kidney": "腎臟泌尿系統",
+  "blood": "血液系統",
+  "tumor": "腫瘤標記",
+  "musculo": "肌肉骨骼系統",
+  "nutrient": "營養素與礦物質",
+  "eye": "眼科檢查",
+  "ent": "耳鼻喉科檢查"
+ },
+ "items": [
+  {
+   "code": "height",
+   "nameZh": "身高",
+   "nameEn": "Body Height",
+   "kind": "num",
+   "unit": "cm",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "weight",
+   "nameZh": "體重",
+   "nameEn": "Body Weight",
+   "kind": "num",
+   "unit": "kg",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "waist",
+   "nameZh": "腰圍",
+   "nameEn": "Waistline",
+   "kind": "num",
+   "unit": "cm",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "body_fat_pct",
+   "nameZh": "體脂肪率",
+   "nameEn": "Body Fat Percentage",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "ideal_weight",
+   "nameZh": "理想體重",
+   "nameEn": "Ideal Body Weight",
+   "kind": "num",
+   "unit": "kg",
+   "chartable": false,
+   "aliases": [
+    "衍生值"
+   ],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "bmi",
+   "nameZh": "身體質量指數",
+   "nameEn": "Body Mass Index",
+   "kind": "num",
+   "unit": "kg/m²",
+   "chartable": true,
+   "aliases": [
+    "BMI"
+   ],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "sbp",
+   "nameZh": "坐姿收縮壓",
+   "nameEn": "SBP, Sitting",
+   "kind": "num",
+   "unit": "mmHg",
+   "chartable": true,
+   "aliases": [
+    "收縮壓"
+   ],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "dbp",
+   "nameZh": "坐姿舒張壓",
+   "nameEn": "DBP, Sitting",
+   "kind": "num",
+   "unit": "mmHg",
+   "chartable": true,
+   "aliases": [
+    "舒張壓"
+   ],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "pulse",
+   "nameZh": "脈搏數",
+   "nameEn": "Pulse Rate",
+   "kind": "num",
+   "unit": "次/分",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "row"
+  },
+  {
+   "code": "pulse_rhythm",
+   "nameZh": "脈搏節律",
+   "nameEn": "Rhythm",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "general",
+   "source": "block",
+   "block": {
+    "section": "general",
+    "heading": "脈搏節律",
+    "cut": "paren"
+   }
+  },
+  {
+   "code": "chief_complaint",
+   "nameZh": "自覺症狀",
+   "nameEn": "Chief Complaints",
+   "kind": "text",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "physical",
+   "source": "block",
+   "block": {
+    "section": "physical",
+    "heading": "自覺症狀",
+    "strip": "^自覺症狀\\s*[:：]\\s*"
+   }
+  },
+  {
+   "code": "smoking",
+   "nameZh": "吸菸習慣",
+   "nameEn": "Smoking Habit",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "physical",
+   "source": "block",
+   "block": {
+    "section": "physical",
+    "heading": "吸菸習慣",
+    "strip": "^[^：:]*[：:]\\s*"
+   }
+  },
+  {
+   "code": "drinking",
+   "nameZh": "飲酒習慣",
+   "nameEn": "Drinking Habit",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "physical",
+   "source": "block",
+   "block": {
+    "section": "physical",
+    "heading": "飲酒習慣",
+    "strip": "^[^：:]*[：:]\\s*"
+   }
+  },
+  {
+   "code": "betel",
+   "nameZh": "嚼檳榔習慣",
+   "nameEn": "Habit of Chewing Betel Nuts",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "physical",
+   "source": "block",
+   "block": {
+    "section": "physical",
+    "heading": "嚼檳榔習慣",
+    "strip": "^[^：:]*[：:]\\s*"
+   }
+  },
+  {
+   "code": "exercise_habit",
+   "nameZh": "運動習慣",
+   "nameEn": "Exercise Habit",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "physical",
+   "source": "block",
+   "block": {
+    "section": "physical",
+    "heading": "運動習慣",
+    "join": true
+   }
+  },
+  {
+   "code": "tg",
+   "nameZh": "三酸甘油酯",
+   "nameEn": "Triglyceride",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "TG"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "tc",
+   "nameZh": "總膽固醇",
+   "nameEn": "Total cholesterol",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "TC"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "hdl_c",
+   "nameZh": "高密度脂蛋白-膽固醇",
+   "nameEn": "HDL-C",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "HDL"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "ldl_c",
+   "nameZh": "低密度脂蛋白-膽固醇",
+   "nameEn": "LDL-C",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "低密度膽固醇",
+    "LDL"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "tc_hdl_ratio",
+   "nameZh": "總/高密度膽固醇比",
+   "nameEn": "Total/HDL Ratio",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "ldl_hdl_ratio",
+   "nameZh": "低/高密度脂蛋白比值",
+   "nameEn": "LDL/HDL ratio",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "fbg",
+   "nameZh": "飯前血糖",
+   "nameEn": "Fasting blood sugar",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "空腹血糖"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "hba1c",
+   "nameZh": "糖化血色素",
+   "nameEn": "Hemoglobin A1c",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [
+    "HbA1c"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "ldh",
+   "nameZh": "乳酸脫氫脢",
+   "nameEn": "Lactate dehydrogenase",
+   "kind": "num",
+   "unit": "IU/L",
+   "chartable": true,
+   "aliases": [
+    "乳酸脫氫酶",
+    "LDH"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "tsh",
+   "nameZh": "甲狀腺刺激素",
+   "nameEn": "TSH",
+   "kind": "num",
+   "unit": "μIU/mL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "ekg_rate",
+   "nameZh": "平均心室率",
+   "nameEn": "Mean Ventricular Rate",
+   "kind": "num",
+   "unit": "次/分",
+   "chartable": true,
+   "aliases": [
+    "心電圖心率"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "cv_risk_10y",
+   "nameZh": "十年心血管疾病風險",
+   "nameEn": "10-year Cardiovascular Risk",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [
+    "Framingham"
+   ],
+   "sectionKey": "cardio",
+   "source": "block",
+   "block": {
+    "section": "cardio",
+    "heading": "十年心血管",
+    "regexNum": "計算結果為\\s*(\\d+(?:\\.\\d+)?)\\s*%"
+   }
+  },
+  {
+   "code": "ast",
+   "nameZh": "麩胺酸苯醋酸轉氨基酶",
+   "nameEn": "GOT, AST",
+   "kind": "num",
+   "unit": "IU/L",
+   "chartable": true,
+   "aliases": [
+    "GOT",
+    "AST"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "alt",
+   "nameZh": "麩胺酸丙酮酸轉氨基酶",
+   "nameEn": "GPT, ALT",
+   "kind": "num",
+   "unit": "IU/L",
+   "chartable": true,
+   "aliases": [
+    "GPT",
+    "ALT"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "total_protein",
+   "nameZh": "總蛋白",
+   "nameEn": "Total protein",
+   "kind": "num",
+   "unit": "g/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "albumin",
+   "nameZh": "白蛋白",
+   "nameEn": "Albumin",
+   "kind": "num",
+   "unit": "g/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "globulin",
+   "nameZh": "球蛋白",
+   "nameEn": "Globulin",
+   "kind": "num",
+   "unit": "g/dL",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "ag_ratio",
+   "nameZh": "白蛋白/球蛋白比例",
+   "nameEn": "A/G ratio",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "ggt",
+   "nameZh": "麩胺酸轉肽酶",
+   "nameEn": "γ-GT",
+   "kind": "num",
+   "unit": "IU/L",
+   "chartable": true,
+   "aliases": [
+    "GGT",
+    "γ-GT",
+    "r-GT"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "alp",
+   "nameZh": "鹼性磷酸酶",
+   "nameEn": "Alkaline phosphatase",
+   "kind": "num",
+   "unit": "U/L",
+   "chartable": true,
+   "aliases": [
+    "ALP"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "t_bil",
+   "nameZh": "總膽紅素",
+   "nameEn": "Total bilirubin",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "d_bil",
+   "nameZh": "直接膽紅素",
+   "nameEn": "Direct bilirubin",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "amylase",
+   "nameZh": "胰澱粉脢",
+   "nameEn": "Amylase",
+   "kind": "num",
+   "unit": "IU/L",
+   "chartable": true,
+   "aliases": [
+    "胰澱粉酶"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "hbsag",
+   "nameZh": "B型肝炎表面抗原",
+   "nameEn": "HBsAg",
+   "kind": "pnr",
+   "unit": "COI",
+   "chartable": true,
+   "aliases": [
+    "HBsAg"
+   ],
+   "sectionKey": "digestive",
+   "source": "row"
+  },
+  {
+   "code": "anti_hbs",
+   "nameZh": "B型肝炎表面抗體",
+   "nameEn": "Anti-HBs",
+   "kind": "pnr",
+   "unit": "",
+   "chartable": true,
+   "aliases": [
+    "Anti-HBs",
+    "HBsAb"
+   ],
+   "sectionKey": "digestive",
+   "source": "row",
+   "flagMode": "none"
+  },
+  {
+   "code": "stool_ob",
+   "nameZh": "潛血（酵素免疫）",
+   "nameEn": "Occult Blood (EIA)",
+   "kind": "pnr",
+   "unit": "ng/mL",
+   "chartable": false,
+   "aliases": [
+    "糞便潛血",
+    "OB"
+   ],
+   "sectionKey": "digestive",
+   "source": "row",
+   "match": {
+    "name": "潛血",
+    "sub": "糞便"
+   }
+  },
+  {
+   "code": "bun",
+   "nameZh": "尿素氮",
+   "nameEn": "Blood urea nitrogen",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "BUN"
+   ],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "uric_acid",
+   "nameZh": "尿酸",
+   "nameEn": "Uric acid",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "creatinine",
+   "nameZh": "肌酸酐",
+   "nameEn": "Creatinine",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "egfr",
+   "nameZh": "腎絲球過濾率",
+   "nameEn": "eGFR",
+   "kind": "num",
+   "unit": "mL/min/1.73m²",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "calcium",
+   "nameZh": "鈣",
+   "nameEn": "Calcium",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "chloride",
+   "nameZh": "氯",
+   "nameEn": "Chloride",
+   "kind": "num",
+   "unit": "mmol/L",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "sodium",
+   "nameZh": "鈉",
+   "nameEn": "Sodium",
+   "kind": "num",
+   "unit": "mmol/L",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "potassium",
+   "nameZh": "鉀",
+   "nameEn": "Potassium",
+   "kind": "num",
+   "unit": "mmol/L",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_appearance",
+   "nameZh": "尿液外觀",
+   "nameEn": "Appearance",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "外觀",
+    "sub": "尿液檢查"
+   }
+  },
+  {
+   "code": "urine_glucose",
+   "nameZh": "尿糖",
+   "nameEn": "Urine Glucose",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_bilirubin",
+   "nameZh": "尿膽紅素",
+   "nameEn": "Urine Bilirubin",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_ketone",
+   "nameZh": "尿酮",
+   "nameEn": "Urine Ketone",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_sg",
+   "nameZh": "尿比重",
+   "nameEn": "Specific gravity",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_occult_blood",
+   "nameZh": "尿潛血",
+   "nameEn": "Urine Occult Blood",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_ph",
+   "nameZh": "酸鹼值",
+   "nameEn": "Urine pH",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_protein",
+   "nameZh": "尿蛋白",
+   "nameEn": "Urine Protein",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_urobilinogen",
+   "nameZh": "尿膽素原",
+   "nameEn": "Urobilinogen",
+   "kind": "num_q",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_nitrite",
+   "nameZh": "亞硝酸鹽",
+   "nameEn": "Nitrite",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row"
+  },
+  {
+   "code": "urine_leukocyte",
+   "nameZh": "尿白血球",
+   "nameEn": "Urine Leukocyte",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "白血球",
+    "sub": "尿液檢查"
+   }
+  },
+  {
+   "code": "urine_rbc",
+   "nameZh": "尿沉渣紅血球",
+   "nameEn": "Urinary Red blood cell",
+   "kind": "range",
+   "unit": "/HPF",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "紅血球",
+    "sub": "尿沉渣"
+   }
+  },
+  {
+   "code": "urine_wbc",
+   "nameZh": "尿沉渣白血球",
+   "nameEn": "Urinary White blood cell",
+   "kind": "range",
+   "unit": "/HPF",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "白血球",
+    "sub": "尿沉渣"
+   }
+  },
+  {
+   "code": "urine_epithelial",
+   "nameZh": "尿沉渣表皮細胞",
+   "nameEn": "Epithelial cell",
+   "kind": "range",
+   "unit": "/HPF",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "表皮細胞",
+    "sub": "尿沉渣"
+   }
+  },
+  {
+   "code": "urine_microorganism",
+   "nameZh": "尿沉渣微生物",
+   "nameEn": "Microorganism",
+   "kind": "ord",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "kidney",
+   "source": "row",
+   "match": {
+    "name": "微生物",
+    "sub": "尿沉渣"
+   }
+  },
+  {
+   "code": "wbc",
+   "nameZh": "白血球",
+   "nameEn": "Leukocytes",
+   "kind": "num",
+   "unit": "x10³/μL",
+   "chartable": true,
+   "aliases": [
+    "WBC"
+   ],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "rbc",
+   "nameZh": "紅血球",
+   "nameEn": "Erythrocytes",
+   "kind": "num",
+   "unit": "x10⁶/μL",
+   "chartable": true,
+   "aliases": [
+    "RBC"
+   ],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "hb",
+   "nameZh": "血紅素",
+   "nameEn": "Hemoglobin",
+   "kind": "num",
+   "unit": "g/dL",
+   "chartable": true,
+   "aliases": [
+    "Hb"
+   ],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "hct",
+   "nameZh": "血球比容",
+   "nameEn": "Hematocrit",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [
+    "Hct"
+   ],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "mcv",
+   "nameZh": "平均紅血球容積",
+   "nameEn": "MCV",
+   "kind": "num",
+   "unit": "fL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "mch",
+   "nameZh": "平均紅血球血色素量",
+   "nameEn": "MCH",
+   "kind": "num",
+   "unit": "pg",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "mchc",
+   "nameZh": "平均紅血球血色素濃度",
+   "nameEn": "MCHC",
+   "kind": "num",
+   "unit": "g/dL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "rdw",
+   "nameZh": "紅血球體積分佈寬度",
+   "nameEn": "RDW",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "plt",
+   "nameZh": "血小板",
+   "nameEn": "Platelet",
+   "kind": "num",
+   "unit": "x10³/μL",
+   "chartable": true,
+   "aliases": [
+    "PLT"
+   ],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "neut_pct",
+   "nameZh": "嗜中性球",
+   "nameEn": "Neutrophil",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "lymph_pct",
+   "nameZh": "淋巴球",
+   "nameEn": "Lymphocyte",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "mono_pct",
+   "nameZh": "單核球",
+   "nameEn": "Monocyte",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "eos_pct",
+   "nameZh": "嗜酸性球",
+   "nameEn": "Eosinophil",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "baso_pct",
+   "nameZh": "嗜鹼性球",
+   "nameEn": "Basophil",
+   "kind": "num",
+   "unit": "%",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "blood",
+   "source": "row"
+  },
+  {
+   "code": "afp",
+   "nameZh": "甲種胎兒蛋白",
+   "nameEn": "Alpha-fetoprotein",
+   "kind": "num",
+   "unit": "ng/mL",
+   "chartable": true,
+   "aliases": [
+    "AFP"
+   ],
+   "sectionKey": "tumor",
+   "source": "row"
+  },
+  {
+   "code": "cea",
+   "nameZh": "癌胚胎抗原",
+   "nameEn": "CEA",
+   "kind": "num",
+   "unit": "ng/mL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "tumor",
+   "source": "row"
+  },
+  {
+   "code": "ca199",
+   "nameZh": "CA199腫瘤標記",
+   "nameEn": "CA19-9",
+   "kind": "num",
+   "unit": "U/mL",
+   "chartable": true,
+   "aliases": [
+    "CA19-9"
+   ],
+   "sectionKey": "tumor",
+   "source": "row"
+  },
+  {
+   "code": "psa",
+   "nameZh": "前列腺特異抗原",
+   "nameEn": "PSA",
+   "kind": "num",
+   "unit": "ng/mL",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "tumor",
+   "source": "row"
+  },
+  {
+   "code": "bmd_hip_t",
+   "nameZh": "左髖關節T評分",
+   "nameEn": "T Score of L't Hip",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "musculo",
+   "source": "row"
+  },
+  {
+   "code": "bmd_hip_z",
+   "nameZh": "左髖關節Z評分",
+   "nameEn": "Z Score of L't Hip",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "musculo",
+   "source": "row"
+  },
+  {
+   "code": "asmi",
+   "nameZh": "四肢骨骼肌肉質量指數",
+   "nameEn": "Appendicular Skeletal Muscle Index",
+   "kind": "num",
+   "unit": "kg/m²",
+   "chartable": true,
+   "aliases": [
+    "ASMI"
+   ],
+   "sectionKey": "musculo",
+   "source": "row",
+   "match": {
+    "name": "四肢骨骼肌肉質量"
+   }
+  },
+  {
+   "code": "vitd",
+   "nameZh": "維他命D（25-OH）",
+   "nameEn": "25-OH Vitamin D (Total)",
+   "kind": "num",
+   "unit": "ng/mL",
+   "chartable": true,
+   "aliases": [
+    "維生素D",
+    "維他命 D"
+   ],
+   "sectionKey": "nutrient",
+   "source": "row",
+   "match": {
+    "name": "維他命D"
+   }
+  },
+  {
+   "code": "va_right",
+   "nameZh": "右眼視力",
+   "nameEn": "Right Eye Visual Acuity",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "eye",
+   "source": "row"
+  },
+  {
+   "code": "va_left",
+   "nameZh": "左眼視力",
+   "nameEn": "Left Eye Visual Acuity",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "eye",
+   "source": "row"
+  },
+  {
+   "code": "va_correction",
+   "nameZh": "視力檢查方式",
+   "nameEn": "Media of Examination",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [
+    "配戴眼鏡"
+   ],
+   "sectionKey": "eye",
+   "source": "block",
+   "block": {
+    "section": "eye",
+    "heading": "檢查方法",
+    "cut": "paren"
+   }
+  },
+  {
+   "code": "iop_right",
+   "nameZh": "右眼眼壓",
+   "nameEn": "Right Eye Ocular Pressure",
+   "kind": "num",
+   "unit": "mmHg",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "eye",
+   "source": "row"
+  },
+  {
+   "code": "iop_left",
+   "nameZh": "左眼眼壓",
+   "nameEn": "Left Eye Ocular Pressure",
+   "kind": "num",
+   "unit": "mmHg",
+   "chartable": true,
+   "aliases": [],
+   "sectionKey": "eye",
+   "source": "row"
+  },
+  {
+   "code": "ishihara",
+   "nameZh": "石原色覺檢查",
+   "nameEn": "Ishihara Test",
+   "kind": "cat",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "eye",
+   "source": "block",
+   "block": {
+    "section": "eye",
+    "heading": "石原色覺",
+    "cut": "paren"
+   }
+  },
+  {
+   "code": "hearing_right_500",
+   "nameZh": "右耳聽力篩檢 500 赫茲",
+   "nameEn": "Hearing Screening right 500 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "500赫茲",
+    "sub": "右耳"
+   }
+  },
+  {
+   "code": "hearing_right_1000",
+   "nameZh": "右耳聽力篩檢 1000 赫茲",
+   "nameEn": "Hearing Screening right 1000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "1000赫茲",
+    "sub": "右耳"
+   }
+  },
+  {
+   "code": "hearing_right_2000",
+   "nameZh": "右耳聽力篩檢 2000 赫茲",
+   "nameEn": "Hearing Screening right 2000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "2000赫茲",
+    "sub": "右耳"
+   }
+  },
+  {
+   "code": "hearing_right_4000",
+   "nameZh": "右耳聽力篩檢 4000 赫茲",
+   "nameEn": "Hearing Screening right 4000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "4000赫茲",
+    "sub": "右耳"
+   }
+  },
+  {
+   "code": "hearing_left_500",
+   "nameZh": "左耳聽力篩檢 500 赫茲",
+   "nameEn": "Hearing Screening left 500 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "500赫茲",
+    "sub": "左耳"
+   }
+  },
+  {
+   "code": "hearing_left_1000",
+   "nameZh": "左耳聽力篩檢 1000 赫茲",
+   "nameEn": "Hearing Screening left 1000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "1000赫茲",
+    "sub": "左耳"
+   }
+  },
+  {
+   "code": "hearing_left_2000",
+   "nameZh": "左耳聽力篩檢 2000 赫茲",
+   "nameEn": "Hearing Screening left 2000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "2000赫茲",
+    "sub": "左耳"
+   }
+  },
+  {
+   "code": "hearing_left_4000",
+   "nameZh": "左耳聽力篩檢 4000 赫茲",
+   "nameEn": "Hearing Screening left 4000 Hz",
+   "kind": "yn",
+   "unit": "",
+   "chartable": false,
+   "aliases": [],
+   "sectionKey": "ent",
+   "source": "row",
+   "match": {
+    "name": "4000赫茲",
+    "sub": "左耳"
+   }
+  },
+  {
+   "code": "hs_crp",
+   "nameZh": "高敏感性C反應蛋白",
+   "nameEn": "hs-CRP",
+   "kind": "num",
+   "unit": "mg/dL",
+   "chartable": true,
+   "aliases": [
+    "hs-CRP"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "cpk",
+   "nameZh": "肌酸磷酸激脢",
+   "nameEn": "Creatine phosphokinase",
+   "kind": "num",
+   "unit": "U/L",
+   "chartable": true,
+   "aliases": [
+    "CPK",
+    "CK"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "ft4",
+   "nameZh": "游離甲狀腺素",
+   "nameEn": "Free T4",
+   "kind": "num",
+   "unit": "ng/dL",
+   "chartable": true,
+   "aliases": [
+    "Free T4"
+   ],
+   "sectionKey": "cardio",
+   "source": "row"
+  },
+  {
+   "code": "rbapwv",
+   "nameZh": "右臂脈波傳導速度",
+   "nameEn": "RbaPWV",
+   "kind": "num",
+   "unit": "cm/s",
+   "chartable": true,
+   "aliases": [
+    "RbaPWV"
+   ],
+   "sectionKey": "cardio",
+   "source": "row",
+   "match": {
+    "sub": "周邊動脈硬化"
+   }
+  },
+  {
+   "code": "lbapwv",
+   "nameZh": "左臂脈波傳導速度",
+   "nameEn": "LbaPWV",
+   "kind": "num",
+   "unit": "cm/s",
+   "chartable": true,
+   "aliases": [
+    "LbaPWV"
+   ],
+   "sectionKey": "cardio",
+   "source": "row",
+   "match": {
+    "sub": "周邊動脈硬化"
+   }
+  },
+  {
+   "code": "rabi",
+   "nameZh": "右側踝臂血壓指數",
+   "nameEn": "Rabi",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [
+    "Rabi",
+    "ABI"
+   ],
+   "sectionKey": "cardio",
+   "source": "row",
+   "match": {
+    "sub": "周邊動脈硬化"
+   }
+  },
+  {
+   "code": "labi",
+   "nameZh": "左側踝臂血壓指數",
+   "nameEn": "Labi",
+   "kind": "num",
+   "unit": "",
+   "chartable": true,
+   "aliases": [
+    "Labi",
+    "ABI"
+   ],
+   "sectionKey": "cardio",
+   "source": "row",
+   "match": {
+    "sub": "周邊動脈硬化"
+   }
+  }
+ ],
+ "findings": [
+  {
+   "key": "pe.thyroid_enlarged",
+   "category": "理學檢查",
+   "labelZh": "甲狀腺腫大（觸診）",
+   "labelEn": "Thyroid Enlarged (palpation)",
+   "text": "甲狀腺腫大",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "頭頸部"
+  },
+  {
+   "key": "chest.apical_pleural_thickening",
+   "category": "胸部X光",
+   "labelZh": "肺尖肋膜增厚",
+   "labelEn": "Apical Pleural Thickening",
+   "text": "肺尖肋膜增厚",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "chest.prominent_lung_markings",
+   "category": "胸部X光",
+   "labelZh": "肺紋變明顯",
+   "labelEn": "Prominent Lung Markings",
+   "text": "肺紋變明顯",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "chest.tortuous_aorta",
+   "category": "胸部X光",
+   "labelZh": "主動脈彎曲",
+   "labelEn": "Tortuous Aorta",
+   "text": "主動脈(弓)?彎曲",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "chest.no_active_lesion",
+   "category": "胸部X光",
+   "labelZh": "無活動性肺部病變",
+   "labelEn": "No Active Lung Lesion",
+   "text": "無活動性肺部病變",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "ekg.sinus_rhythm",
+   "category": "心電圖",
+   "labelZh": "竇性心律",
+   "labelEn": "Sinus Rhythm",
+   "text": "竇性心律",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "ekg.early_repolarization",
+   "category": "心電圖",
+   "labelZh": "ST波上升，疑正常早期再極化",
+   "labelEn": "Early Repolarization",
+   "text": "早期再極化",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "thyroid_us.normal",
+   "category": "甲狀腺超音波",
+   "labelZh": "甲狀腺無異狀",
+   "labelEn": "Thyroid Negative Finding",
+   "text": "甲狀腺無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "carotid_us.normal",
+   "category": "頸動脈超音波",
+   "labelZh": "無血行動力變化",
+   "labelEn": "Normal Carotid Doppler",
+   "text": "無血行動力變化",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "pad.overall_normal",
+   "category": "周邊動脈硬化",
+   "labelZh": "周邊動脈硬化評估：無異狀",
+   "labelEn": "Atherosclerosis assessment normal",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "周邊動脈硬化評估報告"
+  },
+  {
+   "key": "pad.right_elasticity_normal",
+   "category": "周邊動脈硬化",
+   "labelZh": "右側周邊血管彈性：無異狀",
+   "labelEn": "Right vascular elasticity normal",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "右側周邊血管彈性"
+  },
+  {
+   "key": "pad.left_elasticity_normal",
+   "category": "周邊動脈硬化",
+   "labelZh": "左側周邊血管彈性：無異狀",
+   "labelEn": "Left vascular elasticity normal",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "左側周邊血管彈性"
+  },
+  {
+   "key": "pad.right_occlusion_normal",
+   "category": "周邊動脈硬化",
+   "labelZh": "右側周邊血管阻塞程度：無異狀",
+   "labelEn": "Right vascular occlusion normal",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "右側周邊血管阻塞"
+  },
+  {
+   "key": "pad.left_occlusion_normal",
+   "category": "周邊動脈硬化",
+   "labelZh": "左側周邊血管阻塞程度：無異狀",
+   "labelEn": "Left vascular occlusion normal",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "左側周邊血管阻塞"
+  },
+  {
+   "key": "abd.fatty_liver",
+   "category": "腹部超音波",
+   "labelZh": "脂肪肝",
+   "labelEn": "Fatty Liver",
+   "text": "脂肪肝",
+   "normal": false,
+   "severity": true,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "abd.renal_cyst_left",
+   "category": "腹部超音波",
+   "labelZh": "左側腎囊腫",
+   "labelEn": "Left Renal Cyst",
+   "text": "左側腎囊腫",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": true,
+   "quality": false
+  },
+  {
+   "key": "abd.pancreas_obscured",
+   "category": "腹部超音波",
+   "labelZh": "胰臟被腸氣遮蔽（影像品質）",
+   "labelEn": "Pancreas Obscured By Bowel Gas",
+   "text": "胰臟被腸氣遮蔽",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": true
+  },
+  {
+   "key": "abd.view_obscured",
+   "category": "腹部超音波",
+   "labelZh": "影像被腸氣遮蔽（影像品質）",
+   "labelEn": "Echo View Obscured By Bowel Gas",
+   "text": "影像被腸氣遮蔽",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": true
+  },
+  {
+   "key": "lspine.marginal_spur",
+   "category": "腰薦椎X光",
+   "labelZh": "腰椎邊緣骨刺",
+   "labelEn": "Lumbar Marginal Spur",
+   "text": "骨刺",
+   "normal": false,
+   "severity": true,
+   "segments": true,
+   "size": false,
+   "quality": false,
+   "heading": "腰薦椎"
+  },
+  {
+   "key": "abd.pelvic_phlebolith",
+   "category": "腹部X光",
+   "labelZh": "骨盆腔靜脈石",
+   "labelEn": "Pelvic Phlebolith",
+   "text": "靜脈石",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "cspine.retrolisthesis",
+   "category": "頸椎X光",
+   "labelZh": "頸椎向後滑脫",
+   "labelEn": "Cervical Retrolisthesis",
+   "text": "向後滑脫",
+   "normal": false,
+   "severity": false,
+   "segments": true,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "cspine.marginal_spur",
+   "category": "頸椎X光",
+   "labelZh": "頸椎邊緣骨刺",
+   "labelEn": "Cervical Marginal Spur",
+   "text": "骨刺",
+   "normal": false,
+   "severity": true,
+   "segments": true,
+   "size": false,
+   "quality": false,
+   "heading": "頸椎"
+  },
+  {
+   "key": "cspine.posterior_ligament_calcification",
+   "category": "頸椎X光",
+   "labelZh": "後側頸韌帶鈣化",
+   "labelEn": "Posterior Neck Ligamentous Calcification",
+   "text": "頸韌帶鈣化",
+   "normal": false,
+   "severity": true,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "bmd.hip_within_expected",
+   "category": "骨質密度",
+   "labelZh": "左髖骨質密度在預期範圍內",
+   "labelEn": "BMD within expected range",
+   "text": "骨質密度在預期範圍內",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "eye.vision_poor_both",
+   "category": "視力判定",
+   "labelZh": "雙眼視力不良",
+   "labelEn": "Poor Vision OU",
+   "text": "雙眼視力不良",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "eye.vision_poor_left",
+   "category": "視力判定",
+   "labelZh": "左眼視力不良",
+   "labelEn": "Poor Vision OS",
+   "text": "左眼視力不良",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "eye.vision_poor_right",
+   "category": "視力判定",
+   "labelZh": "右眼視力不良",
+   "labelEn": "Poor Vision OD",
+   "text": "右眼視力不良",
+   "normal": false,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false
+  },
+  {
+   "key": "eye.vision_no_abnormal",
+   "category": "視力判定",
+   "labelZh": "視力無明顯異常",
+   "labelEn": "No Special Abnormal Findings",
+   "text": "無明顯異常",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "視力判定"
+  },
+  {
+   "key": "eye.iop_normal",
+   "category": "眼壓判定",
+   "labelZh": "眼壓無異狀",
+   "labelEn": "Ocular pressure negative",
+   "text": "無異狀",
+   "normal": true,
+   "severity": false,
+   "segments": false,
+   "size": false,
+   "quality": false,
+   "heading": "眼壓判定"
+  }
+ ]
+}

@@ -7,14 +7,24 @@
 
 ## 結構
 
-- `index.html`、`js/` — 前端（GitHub Pages）
+- `index.html`、`js/app.js`、`js/firebase-init.js` — 前端（GitHub Pages）
+- `js/parser/extract.js` — 版面層：以座標把 PDF 文字整理成表格列與文字區塊
+- `js/parser/normalize.js` — 數值與參考值正規化、旗標計算
+- `js/import/pdf-loader.js` — 瀏覽器端以 pdf.js 讀取 PDF（固定版本 4.10.38，自 jsDelivr 載入）
+- `js/import/plan.js` — 匯入計畫（回填與正式資料的合併規則、保留建議處理狀態）
+- `js/import/firestore-adapter.js` — Firestore 讀取現況與分批寫入
+- `js/import/import-view.js` — 匯入畫面（選檔、確認、檢視原稿頁、寫入）
+- `js/parser/map.js` — 對應項目字典、產生 observations／findings、去重與回填合併規則、個資掃描
+- `item-dictionary.json` — 項目字典與發現規則（`docs/item-dictionary.md` 為可讀版）
+- `tests/*.test.mjs` — 單元測試（全為合成資料），執行：`node tests/normalize.test.mjs`、`node tests/plan.test.mjs`
 - `firestore.rules` — 安全規則（在 Firebase Console 手動發布）
 
 ## 里程碑
 
 - M0 資料模型與項目字典（完成）
-- M1 登入、Firestore 與安全規則（本版）
-- M2 PDF 解析與確認畫面
+- M1 登入、Firestore 與安全規則（完成）
+- M2a 解析核心（完成）
+- M2b 瀏覽器 PDF 讀取、確認畫面、寫入 Firestore（完成）
 - M3 儀表板
 - M4 隱私模式與去識別匯出
 - M5 AI（複製去識別摘要）

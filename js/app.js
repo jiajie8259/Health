@@ -3,8 +3,10 @@ import {
   GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import {
-  doc, setDoc, getDoc, deleteDoc, serverTimestamp
+  doc, setDoc, getDoc, getDocs, deleteDoc, collection, query, where, writeBatch, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { createAdapter } from "./import/firestore-adapter.js";
+import { mountImport } from "./import/import-view.js";
 
 const $ = (id) => document.getElementById(id);
 const show = (el, on) => { el.hidden = !on; };
@@ -64,6 +66,22 @@ $("btn-test").addEventListener("click", async () => {
   }
 });
 
+// ---- 匯入畫面（登入後才載入）----
+let mountedFor = null;
+async function mountImportFor(user) {
+  if (mountedFor === user.uid) return;
+  mountedFor = user.uid;
+  const root = $("import-root");
+  try {
+    const dict = await (await fetch("./item-dictionary.json", { cache: "no-cache" })).json();
+    const sdk = { collection, doc, getDoc, getDocs, query, where, writeBatch, serverTimestamp };
+    mountImport(root, { adapter: createAdapter(sdk, db, user.uid), dict });
+  } catch (e) {
+    mountedFor = null;
+    root.textContent = "匯入畫面載入失敗：" + (e.message || e);
+  }
+}
+
 onAuthStateChanged(auth, (user) => {
   show($("view-out"), !user);
   show($("view-in"), !!user);
@@ -73,5 +91,9 @@ onAuthStateChanged(auth, (user) => {
     $("uid").textContent = user.uid;
     setMsg($("copy-msg"), "");
     setMsg($("test-msg"), "");
+    mountImportFor(user);
+  } else {
+    mountedFor = null;
+    $("import-root").replaceChildren();
   }
 });

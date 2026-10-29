@@ -9,46 +9,69 @@
   :root {
     --bg: #f5f7f6; --card: #ffffff; --ink: #1d2a27; --sub: #5c6b67;
     --line: #dde4e1; --accent: #1f7a6a; --accent-ink: #ffffff;
-    --ok: #17744f; --err: #b3261e; --code: #eef3f1;
+    --ok: #17744f; --err: #b3261e; --warn: #8a5a00; --code: #eef3f1;
+    --chip: #eaf1ef; --chip-ok: #dff3e8; --chip-bad: #fde4e1; --chip-warn: #fff1d6;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #121816; --card: #1b2421; --ink: #e6efec; --sub: #9bb0aa;
       --line: #2c3a36; --accent: #4cb8a3; --accent-ink: #0b1512;
-      --ok: #6fd3a5; --err: #ff8a80; --code: #24302c;
+      --ok: #6fd3a5; --err: #ff8a80; --warn: #f2c46d; --code: #24302c;
+      --chip: #24302c; --chip-ok: #1d3a2d; --chip-bad: #4a2420; --chip-warn: #42361a;
     }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-    line-height: 1.6; min-height: 100vh; display: grid; place-items: center; padding: 24px 16px;
+    line-height: 1.6; min-height: 100vh; padding: 24px 16px;
   }
-  main { width: 100%; max-width: 440px; }
+  main { width: 100%; max-width: 980px; margin: 0 auto; }
+  #view-out { max-width: 440px; margin: 12vh auto 0; }
   h1 { font-size: 1.35rem; margin: 0 0 4px; letter-spacing: .02em; }
+  h3 { margin: 0; font-size: 1.1rem; }
+  h4 { margin: 16px 0 6px; font-size: .95rem; color: var(--sub); }
   .tag { color: var(--sub); font-size: .9rem; margin: 0 0 20px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 14px; padding: 20px;
-  }
-  .card + .card { margin-top: 14px; }
-  button {
-    font: inherit; cursor: pointer; border-radius: 10px; padding: 10px 16px;
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .card + .card, section + section { margin-top: 14px; }
+  .err-card { border-color: var(--err); }
+  button, .btn {
+    font: inherit; cursor: pointer; border-radius: 10px; padding: 10px 16px; display: inline-block;
     border: 1px solid var(--line); background: var(--card); color: var(--ink);
   }
-  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); width: 100%; font-weight: 600; }
-  button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  #btn-login { width: 100%; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.link { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; font-size: .85rem; }
+  button:focus-visible, .btn:focus-within, input:focus-visible + label, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .label { font-size: .8rem; color: var(--sub); margin: 14px 0 4px; }
   .uid-row { display: flex; gap: 8px; align-items: stretch; }
-  code#uid {
-    flex: 1; background: var(--code); border-radius: 8px; padding: 9px 10px;
-    font-size: .85rem; word-break: break-all; user-select: all;
-  }
+  code#uid { flex: 1; background: var(--code); border-radius: 8px; padding: 9px 10px; font-size: .85rem; word-break: break-all; user-select: all; }
   .msg { min-height: 1.4em; font-size: .9rem; margin: 8px 0 0; }
   .msg.ok { color: var(--ok); } .msg.err { color: var(--err); }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-  .note { color: var(--sub); font-size: .85rem; margin-top: 10px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
+  .note { color: var(--sub); font-size: .85rem; }
+  .strong { font-weight: 600; }
   [hidden] { display: none !important; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .8rem; }
+  .chip.ok { background: var(--chip-ok); } .chip.bad { background: var(--chip-bad); } .chip.warn { background: var(--chip-warn); }
+  .card-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  .tbl th, .tbl td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tbl th { color: var(--sub); font-weight: 500; white-space: nowrap; }
+  .scroll { overflow: auto; max-height: 60vh; }
+  .flist, .issues { margin: 4px 0; padding-left: 20px; font-size: .9rem; }
+  .issues { color: var(--warn); }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; font-size: .9rem; }
+  .rec { font-size: .85rem; white-space: pre-wrap; margin: 6px 0; }
+  .confirm { display: block; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); cursor: pointer; }
+  dialog.pagedlg { max-width: min(820px, 96vw); width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); padding: 14px; }
+  dialog::backdrop { background: rgba(0,0,0,.5); }
+  .pagecv { max-width: 100%; height: auto; background: #fff; }
+  @media (max-width: 600px) { body { padding: 16px; } .card { padding: 14px; } }
 </style>
 </head>
 <body>
@@ -63,30 +86,34 @@
   </section>
 
   <!-- 已登入 -->
-  <section id="view-in" hidden>
-    <div class="card">
-      <div id="uname" style="font-weight:600"></div>
-      <div id="uemail" class="note" style="margin-top:0"></div>
-
-      <div class="label">你的 UID（發布安全規則時要用）</div>
-      <div class="uid-row">
-        <code id="uid"></code>
-        <button id="btn-copy" type="button">複製</button>
+  <div id="view-in" hidden>
+    <section class="card">
+      <div class="row" style="justify-content:space-between; margin-top:0">
+        <div><div id="uname" class="strong"></div><div id="uemail" class="note"></div></div>
+        <button id="btn-logout" type="button">登出</button>
       </div>
-      <p id="copy-msg" class="msg" role="status"></p>
-    </div>
+    </section>
 
-    <div class="card">
-      <div style="font-weight:600">資料庫連線測試</div>
-      <p class="note" style="margin-top:4px">只會暫時寫入再刪除一筆測試文件，不留任何資料。</p>
-      <div class="row"><button id="btn-test" type="button">執行測試</button></div>
-      <p id="test-msg" class="msg" role="status"></p>
-    </div>
+    <section class="card">
+      <h3>匯入健檢報告</h3>
+      <div id="import-root"></div>
+    </section>
 
-    <div class="row" style="margin-top:14px; justify-content:flex-end">
-      <button id="btn-logout" type="button">登出</button>
-    </div>
-  </section>
+    <section class="card">
+      <details>
+        <summary>帳號與資料庫連線測試</summary>
+        <div class="label">你的 UID</div>
+        <div class="uid-row">
+          <code id="uid"></code>
+          <button id="btn-copy" type="button">複製</button>
+        </div>
+        <p id="copy-msg" class="msg" role="status"></p>
+        <p class="note">測試只會暫時寫入再刪除一筆測試文件，不留任何資料。</p>
+        <div class="row"><button id="btn-test" type="button">執行測試</button></div>
+        <p id="test-msg" class="msg" role="status"></p>
+      </details>
+    </section>
+  </div>
 </main>
 <script type="module" src="./js/app.js"></script>
 </body>
