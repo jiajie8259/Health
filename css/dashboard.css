@@ -6,6 +6,10 @@
 @media (prefers-color-scheme: dark) {
   :root { --viz-line: #3987e5; --viz-surface: #1b2421; --viz-grid: #2c2c2a; --viz-axis: #383835; --viz-text2: #c3c2b7; }
 }
+.tabbar { display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; flex-wrap: wrap; margin: 14px 0; border-bottom: 1px solid var(--line); }
+.tabbar .tabs { margin: 0; border: 0; }
+.privbtn { font-size: .85rem; padding: 6px 12px; margin-bottom: 6px; }
+.privbtn[aria-pressed="true"] { background: var(--chip-warn); }
 .tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin: 14px 0; }
 .tab { border: 0; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0; background: none; padding: 10px 16px; font-weight: 500; color: var(--sub); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 700; }
@@ -48,3 +52,10 @@ button.itemlink { font-size: .85rem; text-align: left; }
 .rec-item { border-top: 1px solid var(--line); padding: 10px 0; }
 .itemlink + .chip, .tbl .chip { white-space: nowrap; }
 .scroll.tall { max-height: none; overflow-x: auto; }
+pre.preview { white-space: pre-wrap; word-break: break-word; font-size: .8rem; background: var(--code); border-radius: 8px; padding: 10px; max-height: 50vh; overflow: auto; }
+/* 隱私模式：遮蔽所有數值（表格數值、卡片大數字、圖上的刻度與端點數字、提示框、建議文字） */
+html.privacy .val, html.privacy .viz-tick, html.privacy .viz-end, html.privacy .viz-bandlabel,
+html.privacy .viz-tip, html.privacy .viz-table td, html.privacy .tbl td.note, html.privacy .rec-item .rec,
+html.privacy .flist .note, html.privacy .w-val { filter: blur(7px); user-select: none; }
+html.privacy .viz-svg .viz-grid { opacity: .5; }
+@media print { html.privacy .val { filter: blur(7px); } }
