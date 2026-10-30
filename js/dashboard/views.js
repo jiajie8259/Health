@@ -108,7 +108,7 @@ export function overviewView(ctx) {
       el("div", { class: "w-val val" }, last.valueText, el("small", {}, " " + (last.unit || ""))),
       el("div", {}, flagChip(last.flag), " ", el("span", { class: "note" }, last.date.slice(0, 7))),
       sparkline(pts),
-      el("div", { class: "note" }, prev ? `前次 ${prev.valueText}（${prev.date.slice(0, 7)}）` : "僅此一筆"));
+      el("div", { class: "note" }, prev ? ["前次 ", el("span", { class: "val" }, prev.valueText), `（${prev.date.slice(0, 7)}）`] : "僅此一筆"));
     cards.append(btn);
   }
   if (!cards.children.length) b.append(el("p", { class: "note" }, "關注清單目前沒有可顯示的項目，可按「編輯關注指標」挑選。"));

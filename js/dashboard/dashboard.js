@@ -1,5 +1,6 @@
 // 儀表板外殼：分頁、讀取資料、重新整理
 import { buildModel, DEFAULT_WATCHLIST } from "./model.js";
+import { exportView } from "./exportview.js";
 import { el, overviewView, trendsView, findingsView, recsView } from "./views.js";
 
 const TABS = [
@@ -7,6 +8,7 @@ const TABS = [
   ["trends", "趨勢", trendsView],
   ["findings", "發現", findingsView],
   ["recs", "建議", recsView],
+  ["export", "匯出", exportView],
   ["import", "匯入", null],
 ];
 
@@ -20,8 +22,19 @@ export function mountDashboard(root, deps) {
   const tablist = el("div", { class: "tabs", role: "tablist", "aria-label": "主要分頁" });
   const panel = el("div", { class: "tabpanel", role: "tabpanel", id: "tabpanel", tabindex: "-1" });
   const importPanel = el("div", { class: "card", id: "import-panel", hidden: true }, el("h3", {}, "匯入健檢報告"), el("div", { id: "import-root" }));
+  const priv = el("button", { type: "button", class: "privbtn", "aria-pressed": "false", onclick: () => setPrivacy(!state.privacy) });
   const banner = el("p", { class: "msg", role: "status" });
-  root.replaceChildren(tablist, banner, panel, importPanel);
+  root.replaceChildren(el("div", { class: "tabbar" }, tablist, priv), banner, panel, importPanel);
+
+  function setPrivacy(on) {
+    state.privacy = on;
+    document.documentElement.classList.toggle("privacy", on);
+    priv.setAttribute("aria-pressed", String(on));
+    priv.textContent = on ? "🙈 隱私模式：開（數值已遮蔽）" : "👁 隱私模式：關";
+    try { localStorage.setItem("health.privacy", on ? "1" : "0"); } catch { /* 無法儲存時略過 */ }
+  }
+  let saved = false; try { saved = localStorage.getItem("health.privacy") === "1"; } catch { /* 略過 */ }
+  setPrivacy(saved);
 
   const nav = {
     goTrend(code) { state.trendCode = code; show("trends"); },
