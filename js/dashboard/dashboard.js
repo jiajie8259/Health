@@ -1,5 +1,6 @@
 // 儀表板外殼：分頁、讀取資料、重新整理
 import { buildModel, DEFAULT_WATCHLIST } from "./model.js";
+import { aiView } from "./aiview.js";
 import { exportView } from "./exportview.js";
 import { el, overviewView, trendsView, findingsView, recsView } from "./views.js";
 
@@ -8,6 +9,7 @@ const TABS = [
   ["trends", "趨勢", trendsView],
   ["findings", "發現", findingsView],
   ["recs", "建議", recsView],
+  ["ai", "問 AI", aiView],
   ["export", "匯出", exportView],
   ["import", "匯入", null],
 ];

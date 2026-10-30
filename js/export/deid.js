@@ -12,12 +12,17 @@ function monthsBetween(a, b) {
   return (yb - ya) * 12 + (mb - ma);
 }
 
+export function makeLabel(dates, mode) {
+  const base = dates[0];
+  return (d) => (mode === "relative" ? (d === base ? "第0月" : `第${monthsBetween(base, d)}月`) : d.slice(0, 7));
+}
+
 // opts: dateMode 'month'（年-月）| 'relative'（相對第一次檢查的月數）；scope 'all' | 'abnormal'；findings 是否含發現
 export function buildDeid(model, opts = {}) {
   const o = { dateMode: "month", scope: "abnormal", findings: true, ...opts };
   const dates = model.allDates;
   const base = dates[0];
-  const label = (d) => (o.dateMode === "relative" ? (d === base ? "第0月" : `第${monthsBetween(base, d)}月`) : d.slice(0, 7));
+  const label = makeLabel(dates, o.dateMode);
 
   const items = [];
   for (const it of model.dict.items) {
