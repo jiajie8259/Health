@@ -7,7 +7,7 @@ service cloud.firestore {
     function isOwner(uid) {
       return request.auth != null
           && request.auth.uid == uid
-          && uid == 'YOUR_UID';
+          && uid == 'Zn6PqtPuUoh5zaz3ynDNMcyKm7N2';
     }
 
     // 擁有者在 settings/sharing 文件裡維護「家人唯讀名單」（viewerUids）與「是否讓家人看備註」（shareNotes）。
@@ -17,7 +17,7 @@ service cloud.firestore {
     }
     function isViewer(uid) {
       return request.auth != null
-          && uid == 'YOUR_UID'
+          && uid == 'Zn6PqtPuUoh5zaz3ynDNMcyKm7N2'
           && exists(sharingPath(uid))
           && request.auth.uid in get(sharingPath(uid)).data.viewerUids;
     }
