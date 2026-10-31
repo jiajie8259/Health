@@ -2,20 +2,43 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // 階段 1（先發布這一版，用來完成第一次登入與連線測試）
-    // 每個登入者只能讀寫「自己 uid 底下」的資料，其他路徑全部拒絕。
-    match /users/{uid}/{document=**} {
-      allow read, write: if request.auth != null
-                         && request.auth.uid == uid;
+    // ========= 請把下面的 YOUR_UID 換成「你本人」的 UID（與目前已發布的階段 2 相同） =========
+
+    function isOwner(uid) {
+      return request.auth != null
+          && request.auth.uid == uid
+          && uid == 'YOUR_UID';
     }
 
-    // 階段 2（取得你的 UID 後，把上面整段 match 換成下面這段再發布）
-    // 連「自己 uid 底下」也只允許你本人的 UID，其他 Google 帳號完全無法寫入。
-    //
-    // match /users/{uid}/{document=**} {
-    //   allow read, write: if request.auth != null
-    //                      && request.auth.uid == uid
-    //                      && uid == 'YOUR_UID';
-    // }
+    // 擁有者在 settings/sharing 文件裡維護「家人唯讀名單」（viewerUids）與「是否讓家人看備註」（shareNotes）。
+    // 文件不存在、或沒有 viewerUids 欄位時，下面的判斷會失敗＝一律拒絕。
+    function sharingPath(uid) {
+      return /databases/$(database)/documents/users/$(uid)/settings/sharing;
+    }
+    function isViewer(uid) {
+      return request.auth != null
+          && uid == 'YOUR_UID'
+          && exists(sharingPath(uid))
+          && request.auth.uid in get(sharingPath(uid)).data.viewerUids;
+    }
+
+    // 擁有者：自己 uid 底下全部可讀寫
+    match /users/{uid}/{document=**} {
+      allow read, write: if isOwner(uid);
+    }
+
+    // 家人（唯讀）：只能讀，且讀不到「備註」與「分享設定」
+    match /users/{uid}/{coll}/{id} {
+      allow read: if isViewer(uid)
+                  && coll != 'notes'
+                  && !(coll == 'settings' && id == 'sharing')
+                  && coll != '_system';
+    }
+
+    // 備註（私人區）：預設只有你看得到；你在網頁「分享」頁打開「讓家人看備註」後，家人才讀得到。家人永遠不能寫。
+    match /users/{uid}/notes/{id} {
+      allow read: if isViewer(uid)
+                  && get(sharingPath(uid)).data.get('shareNotes', false) == true;
+    }
   }
 }
