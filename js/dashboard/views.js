@@ -94,7 +94,7 @@ export function overviewView(ctx) {
   // ---- B：關注指標 ----
   const b = el("section", { class: "card" });
   const wl = state.watchlist.filter((c) => model.numeric(c).length);
-  const editBtn = el("button", { type: "button", onclick: () => { state.editWatch = !state.editWatch; nav.refresh(); } }, state.editWatch ? "完成" : "編輯關注指標");
+  const editBtn = ctx.readOnly ? null : el("button", { type: "button", onclick: () => { state.editWatch = !state.editWatch; nav.refresh(); } }, state.editWatch ? "完成" : "編輯關注指標");
   b.append(el("div", { class: "row", style: "justify-content:space-between;margin-top:0" }, el("h3", {}, "關注指標"), editBtn));
   if (state.editWatch) b.append(watchEditor(ctx));
   const cards = el("div", { class: "wcards" });
@@ -192,7 +192,8 @@ export function findingsView(ctx) {
   if (!dates.length) { root.append(el("p", { class: "note" }, "還沒有資料。")); return root; }
   const showNormal = !!state.showNormalFindings;
   const toggle = el("label", { class: "check" }, el("input", { type: "checkbox", checked: showNormal, onchange: (e) => { state.showNormalFindings = e.target.checked; nav.refresh(); } }), " 同時顯示「正常／品質備註」類項目");
-  root.append(el("h3", {}, "歷年發現時間軸"), el("p", { class: "note" }, "每列是一項影像、超音波、理學檢查等文字發現；● 表示該次報告有列出，— 表示沒有。游標移到 ● 可看原文。"), toggle);
+  root.append(el("h3", {}, "歷年發現時間軸"), el("p", { class: "note" }, "每列是一項影像、超音波、理學檢查等文字發現；● 表示該次報告有列出，— 表示沒有。游標移到 ● 可看原文。"),
+    el("p", { class: "note" }, "★ ＝原報告在該項前面印有星號（＊），表示該次報告把這一項標為異常或需注意；沒有 ★ 代表報告有列出但未特別標星。"), toggle);
   const mx = model.matrix().filter((r) => showNormal || (!r.normal && !r.quality));
   if (!mx.length) { root.append(el("p", { class: "note" }, "沒有異常發現。")); return root; }
   const t = el("table", { class: "tbl matrix" },
@@ -222,11 +223,19 @@ export function recsView(ctx) {
   const sel = el("select", { id: "rec-date", "aria-label": "選擇報告" }, dates.map((d) => el("option", { value: d, selected: d === state.recDate }, d)));
   sel.addEventListener("change", () => { state.recDate = sel.value; nav.refresh(); });
   root.append(el("h3", {}, "健檢建議"), el("div", { class: "row" }, el("label", { for: "rec-date", class: "strong" }, "報告"), sel,
-    el("span", { class: "note" }, "「處理狀態」與「備註」是你自己的紀錄，會存進資料庫；重新匯入同一份報告不會蓋掉它們。")));
+    el("span", { class: "note" }, ctx.readOnly ? "" : "「處理狀態」與「備註」是你自己的紀錄，會存進資料庫；重新匯入同一份報告不會蓋掉它們。")));
   const list = model.recs.filter((r) => r.examDate === state.recDate);
   const counts = {}; for (const r of list) counts[r.myStatus || "待處理"] = (counts[r.myStatus || "待處理"] || 0) + 1;
   root.append(el("div", { class: "chips" }, STATUSES.map((s) => el("span", { class: "chip " + (s === "待處理" && counts[s] ? "warn" : "") }, `${s} ${counts[s] || 0}`))));
+  if (ctx.readOnly) root.append(el("p", { class: "note" }, ctx.notesVisible ? "唯讀檢視：處理狀態與備註由擁有者填寫。" : "唯讀檢視：處理狀態由擁有者填寫；備註未對家人開放。"));
   for (const r of list) {
+    if (ctx.readOnly) {
+      root.append(el("div", { class: "rec-item" },
+        el("div", { class: "rec" }, el("span", { class: "strong" }, r.no + ". "), r.text),
+        el("div", { class: "row" }, el("span", { class: "chip " + ((r.myStatus || "待處理") === "待處理" ? "warn" : "") }, r.myStatus || "待處理")),
+        ctx.notesVisible && r.myNote ? el("div", { class: "note" }, "備註：" + r.myNote) : null));
+      continue;
+    }
     const msg = el("span", { class: "note", role: "status" });
     const save = async (patch) => {
       Object.assign(r, patch);
@@ -236,7 +245,7 @@ export function recsView(ctx) {
     };
     const st = el("select", { "aria-label": `第 ${r.no} 項處理狀態` }, STATUSES.map((s) => el("option", { value: s, selected: s === (r.myStatus || "待處理") }, s)));
     st.addEventListener("change", () => save({ myStatus: st.value }));
-    const note = el("textarea", { rows: 2, "aria-label": `第 ${r.no} 項備註`, placeholder: "備註（例如：已預約複診）", value: r.myNote || "" });
+    const note = el("textarea", { rows: 2, "aria-label": `第 ${r.no} 項備註`, placeholder: "備註（存在私人區；家人預設看不到）", value: r.myNote || "" });
     note.addEventListener("change", () => save({ myNote: note.value }));
     root.append(el("div", { class: "rec-item" },
       el("div", { class: "rec" }, el("span", { class: "strong" }, r.no + ". "), r.text),

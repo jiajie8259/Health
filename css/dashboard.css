@@ -59,3 +59,6 @@ html.privacy .viz-tip, html.privacy .viz-table td, html.privacy .tbl td.note, ht
 html.privacy .flist .note, html.privacy .w-val { filter: blur(7px); user-select: none; }
 html.privacy .viz-svg .viz-grid { opacity: .5; }
 @media print { html.privacy .val { filter: blur(7px); } }
+.uidcode { background: var(--code); border-radius: 8px; padding: 6px 8px; font-size: .8rem; word-break: break-all; user-select: all; }
+.viewer-banner { display: block; border-radius: 10px; margin: 14px 0 0; padding: 8px 12px; }
+.viewer-row { gap: 10px; }

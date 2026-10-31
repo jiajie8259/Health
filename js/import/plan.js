@@ -64,7 +64,7 @@ export function planImport(mapped, existing = {}) {
     const id = `${D}_${String(r.no).padStart(2, "0")}`;
     newRecIds.add(id);
     if (ex.recommendations.has(id)) ops.push(update("recommendations", id, { text: r.text }));
-    else ops.push(set("recommendations", id, { examDate: D, no: r.no, text: r.text, myStatus: "待處理", myNote: "" }));
+    else ops.push(set("recommendations", id, { examDate: D, no: r.no, text: r.text, myStatus: "待處理" }));
   }
   for (const id of ex.recommendations.keys()) if (id.startsWith(D + "_") && !newRecIds.has(id)) ops.push(del("recommendations", id));
 

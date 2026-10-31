@@ -48,7 +48,7 @@ export function createAdapter(sdk, db, uid) {
       return out.sort((a, b) => a.examDate.localeCompare(b.examDate));
     },
 
-    // 讀取儀表板需要的全部資料
+    // 讀取儀表板需要的全部資料。備註放在私人區 notes；家人讀不到時（權限不足或未開放）notesVisible 為 false。
     async loadAll() {
       const read = async (name) => {
         const snap = await sdk.getDocs(col(name));
@@ -58,15 +58,47 @@ export function createAdapter(sdk, db, uid) {
       };
       const [observations, findings, reports, recommendations] = await Promise.all(
         ["observations", "findings", "reports", "recommendations"].map(read));
-      return { observations, findings, reports, recommendations };
+      let notes = [], notesVisible = true;
+      try { notes = await read("notes"); } catch (e) { if (e.code === "permission-denied") notesVisible = false; else throw e; }
+      const byId = new Map(notes.map((n) => [n.id, n.text || ""]));
+      for (const r of recommendations) {
+        if ("myNote" in r) { r.legacyField = true; if (typeof r.myNote === "string" && r.myNote) r.legacyNote = r.myNote; }   // 舊版欄位，待搬移
+        r.hasPrivateNote = byId.has(r.id);
+        if (byId.has(r.id)) r.myNote = byId.get(r.id);
+        else if (!notesVisible) r.myNote = "";
+      }
+      return { observations, findings, reports, recommendations, notesVisible };
     },
 
-    // 建議的「我的處理狀態／備註」（只更新這兩個欄位）
+    // 舊版把備註放在 recommendations 文件裡（家人讀得到）；擁有者載入時一次搬到私人區。回傳搬了幾筆。
+    async migrateLegacyNotes(recs) {
+      const legacy = recs.filter((r) => r.legacyField);
+      if (!legacy.length) return 0;
+      const batch = sdk.writeBatch(db);
+      for (const r of legacy) {
+        if (r.legacyNote && !r.hasPrivateNote) batch.set(ref("notes", r.id), { text: r.legacyNote });
+        batch.update(ref("recommendations", r.id), { myNote: sdk.deleteField() });
+      }
+      await batch.commit();
+      for (const r of legacy) { delete r.legacyNote; delete r.legacyField; r.hasPrivateNote = r.hasPrivateNote || !!r.myNote; }
+      return legacy.length;
+    },
+
+    // 建議的「我的處理狀態」存在 recommendations；「備註」存在私人區 notes
     async updateRecommendation(id, patch) {
-      const data = {};
-      if (patch.myStatus !== undefined) data.myStatus = patch.myStatus;
-      if (patch.myNote !== undefined) data.myNote = patch.myNote;
-      await sdk.setDoc(ref("recommendations", id), data, { merge: true });
+      if (patch.myStatus !== undefined) await sdk.setDoc(ref("recommendations", id), { myStatus: patch.myStatus }, { merge: true });
+      if (patch.myNote !== undefined) await sdk.setDoc(ref("notes", id), { text: patch.myNote });
+    },
+
+    // 分享設定（只有擁有者能讀寫）
+    async loadSharing() {
+      const d = await sdk.getDoc(ref("settings", "sharing"));
+      const v = d.exists() ? d.data() : {};
+      return { viewers: Array.isArray(v.viewers) ? v.viewers : [], shareNotes: v.shareNotes === true };
+    },
+    async saveSharing({ viewers, shareNotes }) {
+      const clean = viewers.map((x) => ({ uid: String(x.uid).trim(), label: String(x.label || "").trim() }));
+      await sdk.setDoc(ref("settings", "sharing"), { viewerUids: clean.map((x) => x.uid), viewers: clean, shareNotes: !!shareNotes });
     },
 
     // 個人設定（關注指標清單）

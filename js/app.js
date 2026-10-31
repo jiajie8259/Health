@@ -3,10 +3,11 @@ import {
   GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import {
-  doc, setDoc, getDoc, getDocs, deleteDoc, collection, query, where, writeBatch, serverTimestamp
+  doc, setDoc, getDoc, getDocs, deleteDoc, deleteField, collection, query, where, writeBatch, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 import { createAdapter } from "./import/firestore-adapter.js";
 import { mountImport } from "./import/import-view.js";
+import { OWNER_UID } from "./config.js";
 import { mountDashboard } from "./dashboard/dashboard.js";
 
 const $ = (id) => document.getElementById(id);
@@ -75,10 +76,13 @@ async function mountAppFor(user) {
   const root = $("dash-root");
   try {
     const dict = await (await fetch("./item-dictionary.json", { cache: "no-cache" })).json();
-    const sdk = { collection, doc, getDoc, getDocs, setDoc, query, where, writeBatch, serverTimestamp };
-    const adapter = createAdapter(sdk, db, user.uid);
+    const sdk = { collection, doc, getDoc, getDocs, setDoc, deleteField, query, where, writeBatch, serverTimestamp };
+    const configured = OWNER_UID && OWNER_UID !== "YOUR_UID";
+    const ownerUid = configured ? OWNER_UID : user.uid;
+    const readOnly = user.uid !== ownerUid;                     // 非擁有者＝家人唯讀檢視
+    const adapter = createAdapter(sdk, db, ownerUid);
     await mountDashboard(root, {
-      adapter, dict,
+      adapter, dict, readOnly, ownerUid, userUid: user.uid,
       renderImport: (panel, onWritten) => mountImport(panel, { adapter, dict, onWritten }),
     });
   } catch (e) {
@@ -96,6 +100,7 @@ onAuthStateChanged(auth, (user) => {
     $("uid").textContent = user.uid;
     setMsg($("copy-msg"), "");
     setMsg($("test-msg"), "");
+    $("diag").hidden = !!(OWNER_UID && OWNER_UID !== "YOUR_UID" && user.uid !== OWNER_UID);   // 家人不需要連線測試
     mountAppFor(user);
   } else {
     mountedFor = null;
